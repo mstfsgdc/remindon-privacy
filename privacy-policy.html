@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gizlilik Politikası — RemindOn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --indigo: #4f46e5;
+      --indigo-light: #ede9fe;
+      --amber: #f59e0b;
+      --text: #1a1a2e;
+      --muted: #888;
+      --bg: #f7f7fb;
+      --white: #ffffff;
+      --border: #e8e8f0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--indigo);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-icon svg { width: 18px; height: 18px; }
+
+    .nav-brand {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-brand span { font-weight: 400; color: var(--muted); }
+
+    /* LANG TOGGLE */
+    .lang-toggle {
+      margin-left: auto;
+      display: flex;
+      gap: 4px;
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 4px;
+    }
+
+    .lang-btn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--white);
+      color: var(--indigo);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--indigo);
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* SUMMARY CARDS */
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      max-width: 860px;
+      margin: -28px auto 0;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .summary-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      box-shadow: 0 4px 20px rgba(79,70,229,0.08);
+      border: 1px solid var(--border);
+    }
+
+    .summary-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--indigo-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .summary-icon svg { width: 18px; height: 18px; color: var(--indigo); }
+
+    .summary-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .summary-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 720px;
+      margin: 48px auto;
+      padding: 0 24px 64px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--indigo);
+      margin-bottom: 8px;
+    }
+
+    .section h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .section p {
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    .section ul {
+      list-style: none;
+      margin-top: 8px;
+    }
+
+    .section ul li {
+      font-size: 15px;
+      color: #444;
+      padding: 8px 0 8px 28px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section ul li:last-child { border-bottom: none; }
+
+    .section ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background: var(--indigo-light);
+      border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234f46e5' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: 10px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .highlight-box {
+      background: var(--indigo-light);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-top: 16px;
+      border-left: 4px solid var(--indigo);
+    }
+
+    .highlight-box p {
+      color: var(--indigo);
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 40px 0;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    footer a {
+      color: var(--indigo);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* LANG SECTIONS */
+    .lang-tr, .lang-en { display: none; }
+    .lang-tr.active, .lang-en.active { display: block; }
+
+    @media (max-width: 600px) {
+      .summary { margin-top: -20px; }
+      .hero { padding: 40px 20px 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+      <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+    </svg>
+  </div>
+  <span class="nav-brand">Remind<span>On</span></span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('tr')">TR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <span class="lang-tr active">Gizlilik Politikası</span>
+    <span class="lang-en">Privacy Policy</span>
+  </div>
+  <h1>
+    <span class="lang-tr active">Verileriniz size aittir.</span>
+    <span class="lang-en">Your data belongs to you.</span>
+  </h1>
+  <p>
+    <span class="lang-tr active">RemindOn hiçbir kişisel veriyi toplamaz. Yalnızca anonim kullanım istatistikleri toplanır.</span>
+    <span class="lang-en">RemindOn does not collect personal data. Only anonymous usage statistics are collected.</span>
+  </p>
+</div>
+
+<!-- SUMMARY CARDS -->
+<div class="summary">
+  <div class="summary-card">
+    <div class="summary-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    </div>
+    <div>
+      <div class="summary-title lang-tr active">Yerel Depolama</div>
+      <div class="summary-title lang-en">Local Storage</div>
+      <div class="summary-desc lang-tr active">Tüm veriler yalnızca cihazınızda saklanır.</div>
+      <div class="summary-desc lang-en">All data is stored only on your device.</div>
+    </div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <div>
+      <div class="summary-title lang-tr active">Sunucu Yok</div>
+      <div class="summary-title lang-en">No Server</div>
+      <div class="summary-desc lang-tr active">Hiçbir veri internet üzerinden iletilmez.</div>
+      <div class="summary-desc lang-en">No data is transmitted over the internet.</div>
+    </div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    </div>
+    <div>
+      <div class="summary-title lang-tr active">Anonim Analitik</div>
+      <div class="summary-title lang-en">Anonymous Analytics</div>
+      <div class="summary-desc lang-tr active">PostHog ile yalnızca anonim kullanım istatistikleri toplanır.</div>
+      <div class="summary-desc lang-en">Only anonymous usage statistics via PostHog.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT TR -->
+<div class="content">
+  <div class="lang-tr active">
+
+    <div class="section">
+      <div class="section-label">Genel Bakış</div>
+      <h2>Bu politika ne kapsar?</h2>
+      <p>Bu gizlilik politikası, RemindOn mobil uygulamasının ("Uygulama") kişisel verilerle nasıl ilgilendiğini açıklar. Uygulama; Android cihazlarda çalışan, aylık görev takibi ve hatırlatıcı bildirimleri sağlayan bir araçtır.</p>
+      <p>Son güncelleme: Haziran 2026</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">Veri Toplama</div>
+      <h2>Hangi veriler toplanır?</h2>
+      <p>RemindOn <strong>hiçbir kişisel veri toplamaz.</strong> Uygulama içinde oluşturduğunuz görevler, notlar ve ayarlar yalnızca cihazınızın yerel depolama alanına (AsyncStorage) kaydedilir.</p>
+      <div class="highlight-box">
+        <p>Hiçbir veri sunucuya gönderilmez. İnternet bağlantısı gerektirmez.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">İzinler</div>
+      <h2>Uygulama hangi izinleri kullanır?</h2>
+      <ul>
+        <li><strong>Bildirim İzni:</strong> Belirlediğiniz günde hatırlatma bildirimi göndermek için kullanılır. Bildirim içeriği yalnızca cihazınızda oluşturulur.</li>
+        <li><strong>Kesin Zamanlı Alarm:</strong> Android 12+ cihazlarda belirli bir saatte bildirim gönderebilmek için gereklidir.</li>
+        <li><strong>Önyükleme Alımı:</strong> Telefon yeniden başlatıldığında zamanlanmış bildirimlerin korunması için kullanılır.</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">Üçüncü Taraflar</div>
+      <h2>Hangi üçüncü taraf servisler kullanılır?</h2>
+      <p>RemindOn, uygulama deneyimini iyileştirmek amacıyla <strong>PostHog</strong> analitik servisini kullanır. PostHog aracılığıyla toplanan veriler:</p>
+      <ul>
+        <li>Hangi özelliklerin kullanıldığı (görev ekleme, tamamlama gibi)</li>
+        <li>Ekran gezinme istatistikleri</li>
+        <li>Oturum süresi ve kullanım sıklığı</li>
+      </ul>
+      <p>Bu veriler tamamen anonimdir, kimliğinizi doğrudan tanımlayan hiçbir bilgi toplanmaz. Reklam, pazarlama veya profilleme amacıyla kullanılmaz.</p>
+      <div class="highlight-box">
+        <p>PostHog'un gizlilik politikasına <a href="https://posthog.com/privacy" style="color: var(--indigo);">posthog.com/privacy</a> adresinden ulaşabilirsiniz.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">Veri Silme</div>
+      <h2>Verilerimi nasıl silebilirim?</h2>
+      <p>Verileriniz yalnızca cihazınızda bulunduğundan, uygulamayı cihazınızdan kaldırdığınızda tüm veriler otomatik olarak silinir. Bunun dışında uygulama içindeki ayarlar ekranından görevlerinizi manuel olarak silebilirsiniz.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">Çocukların Gizliliği</div>
+      <h2>Çocuklara yönelik kullanım</h2>
+      <p>RemindOn 13 yaş altı çocukları hedeflememektedir. Uygulama hiçbir kişisel veri toplamadığından çocukların kullanımı açısından ek bir risk oluşturmaz.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">İletişim</div>
+      <h2>Sorularınız için</h2>
+      <p>Bu gizlilik politikasıyla ilgili sorularınız için aşağıdaki adresten bize ulaşabilirsiniz:</p>
+      <div class="highlight-box">
+        <p>📧 <a href="mailto:iletisim@sistemra.com" style="color: var(--indigo);">iletisim@sistemra.com</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONTENT EN -->
+  <div class="lang-en">
+
+    <div class="section">
+      <div class="section-label">Overview</div>
+      <h2>What does this policy cover?</h2>
+      <p>This privacy policy describes how the RemindOn mobile application ("App") handles personal data. The App is a tool that runs on Android devices and provides monthly task tracking and reminder notifications.</p>
+      <p>Last updated: June 2026</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">Data Collection</div>
+      <h2>What data is collected?</h2>
+      <p>RemindOn <strong>does not collect any personal data.</strong> Tasks, notes, and settings you create within the App are saved only to your device's local storage (AsyncStorage).</p>
+      <div class="highlight-box">
+        <p>No data is sent to any server. No internet connection is required.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">Permissions</div>
+      <h2>What permissions does the App use?</h2>
+      <ul>
+        <li><strong>Notification Permission:</strong> Used to send reminder notifications on the day you specify. Notification content is generated only on your device.</li>
+        <li><strong>Exact Alarm:</strong> Required on Android 12+ devices to deliver notifications at a specific time.</li>
+        <li><strong>Receive Boot Completed:</strong> Used to restore scheduled notifications when your phone restarts.</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">Third Parties</div>
+      <h2>What third-party services are used?</h2>
+      <p>RemindOn uses <strong>PostHog</strong> analytics to improve the app experience. Data collected through PostHog includes:</p>
+      <ul>
+        <li>Which features are used (adding tasks, completing them, etc.)</li>
+        <li>Screen navigation statistics</li>
+        <li>Session duration and usage frequency</li>
+      </ul>
+      <p>This data is completely anonymous — no personally identifiable information is collected. It is never used for advertising, marketing, or profiling purposes.</p>
+      <div class="highlight-box">
+        <p>You can read PostHog's privacy policy at <a href="https://posthog.com/privacy" style="color: var(--indigo);">posthog.com/privacy</a>.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">Data Deletion</div>
+      <h2>How can I delete my data?</h2>
+      <p>Since your data exists only on your device, uninstalling the App will automatically delete all data. You can also manually delete tasks from the settings screen within the App.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">Children's Privacy</div>
+      <h2>Use by children</h2>
+      <p>RemindOn is not directed at children under the age of 13. Since the App does not collect any personal data, it poses no additional risk for use by children.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-label">Contact</div>
+      <h2>Questions?</h2>
+      <p>If you have any questions about this privacy policy, you can reach us at:</p>
+      <div class="highlight-box">
+        <p>📧 <a href="mailto:support@remindon.app" style="color: var(--indigo);">support@remindon.app</a></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="lang-tr active">© 2026 RemindOn. Tüm hakları saklıdır.</p>
+  <p class="lang-en">© 2026 RemindOn. All rights reserved.</p>
+  <p style="margin-top: 8px;">
+    <span class="lang-tr active">Bu politika en son <strong>Haziran 2026</strong> tarihinde güncellenmiştir.</span>
+    <span class="lang-en">This policy was last updated in <strong>June 2026</strong>.</span>
+  </p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('.lang-tr, .lang-en').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.lang-' + lang).forEach(el => el.classList.add('active'));
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    document.documentElement.lang = lang;
+  }
+</script>
+
+</body>
+</html>
+```
